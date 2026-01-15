@@ -1,24 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Business/Login";
+import SignUp from "./Business/SignUp";
+import Main from "./Business/Main";
+import PrivateRoute from "./PrivateRoute";
+import Menu from "./Business/Menu/Menu";
+import Add from "./Business/Menu/Add";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+
+        {/* 메인 */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Main />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/main"
+          element={
+            <PrivateRoute>
+              <Main />
+            </PrivateRoute>
+          }
+        />
+
+        {/* 메뉴관리 */}
+        <Route
+          path="/menu"
+          element={
+            <PrivateRoute>
+              <Menu />
+            </PrivateRoute>
+          }
+        />
+
+          <Route
+  path="/menu/add"
+  element={
+    <PrivateRoute>
+      <Add />
+    </PrivateRoute>
+  }
+/>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
