@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,19 +12,28 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    // 🟢 더미 로그인 로직
-    if (email === "test@test.com" && password === "1234") {
-      setLoginCheck(false);
+    try {
+      const res = await axios.post("http://localhost/api/v1/store-owner/auth/login", {
+        email: email,
+        password: password,
+      });
 
-      sessionStorage.setItem("token", "dummy-token-1234");
-      sessionStorage.setItem("email", email);
-      sessionStorage.setItem("role", "ADMIN");
-      sessionStorage.setItem("storeid", "1");
-      sessionStorage.setItem("userName", "테스트사용자");
+      // 로그인 성공
+      // setLoginCheck(false);
 
-      console.log("더미 로그인 성공:", email);
-      navigate("/");
-    } else {
+      sessionStorage.setItem("token", res.data);
+      sessionStorage.setItem("userName", res.data.userName);
+      sessionStorage.setItem("role", res.data.role);
+      sessionStorage.setItem("storeid", res.data.storeId);
+
+      console.log(res.data.storeOwnerId);
+      console.log(res.data.storeOwnerName);
+      console.log(res.data.roleName);
+
+
+      navigate("/main");
+    } catch (error) {
+      console.error("로그인 실패", error);
       setLoginCheck(true);
     }
   };
@@ -31,20 +41,18 @@ const Login = () => {
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
-        <h1>On&Off</h1>
+        <h1>로그인</h1>
 
-        <label htmlFor="username">이메일</label>
+        <label>이메일</label>
         <input
           type="text"
-          id="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label htmlFor="password">비밀번호</label>
+        <label>비밀번호</label>
         <input
           type="password"
-          id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />

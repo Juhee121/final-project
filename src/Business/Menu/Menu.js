@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+//더미데이터
 const dummyMenus = [
   {
     id: 1,
@@ -18,6 +19,7 @@ const dummyMenus = [
     imageUrl: "https://via.placeholder.com/150",
   },
 ];
+
 function Menu() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);

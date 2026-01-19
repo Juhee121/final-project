@@ -33,7 +33,6 @@ function Add() {
     setImages(updated);
   };
 
-  // ✅ 메뉴 등록 (백엔드 연동)
   const handleSubmit = async () => {
     if (!menuName || !price) {
       alert("메뉴명과 가격은 필수입니다.");

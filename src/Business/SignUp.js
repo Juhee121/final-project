@@ -54,7 +54,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSignup}>
-        <h1>On&Off</h1>
+        <h1>회원가입</h1>
 
         <label>아이디</label>
         <input
