@@ -29,13 +29,17 @@ function Menu() {
   const [menus, setMenus] = useState([]);
 
   useEffect(() => {
-    // fetchMenus();
-    setMenus(dummyMenus);
+    fetchMenus();
+    // setMenus(dummyMenus);
   }, []);
 
   const fetchMenus = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/menus");
+
+      const store = await axios.get("http://localhost/api/v1/owner/stores");
+      console.log(store);
+      const token = sessionStorage.getItem("token");
+      const res = await axios.get("http://localhost/stores/{storeId}/menus");
       setMenus(res.data);
     } catch (error) {
       console.error("메뉴 조회 실패", error);

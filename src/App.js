@@ -38,26 +38,20 @@ function App() {
         <Route
           path="/menu"
           element={
-            <PrivateRoute>
               <Menu />
-            </PrivateRoute>
           }
         />
 
           <Route
           path="/menu/add"
           element={
-            <PrivateRoute>
               <Add />
-            </PrivateRoute>
           }
         />
         <Route
           path="/menu/:menuId/edit"
           element={
-            <PrivateRoute>
               <Edit />
-            </PrivateRoute>
           }
         />
       

@@ -19,7 +19,7 @@ const Edit = () => {
   const fetchMenuDetail = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/menus/${menuId}`
+        `http://localhost:8080/stores/{storeId}/menus/{menuId}`
       );
       setMenu(res.data);
     } catch (error) {
@@ -38,7 +38,7 @@ const Edit = () => {
   const handleSubmit = async () => {
     try {
       await axios.put(
-        `http://localhost:8080/api/menus/${menuId}`,
+        `http://localhost:8080/stores/{storeId}/menus/{menuId}`,
         menu
       );
       alert("메뉴 수정 완료!");
